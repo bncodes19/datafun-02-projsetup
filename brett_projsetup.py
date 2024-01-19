@@ -15,9 +15,13 @@ def create_folders_for_range(start_year, end_year):
         Path(folder_name).mkdir(exist_ok=True)
         print(f"Folder '{folder_name}' created.")
 
-def create_folders_from_list(folder_list, **kwargs):
+def create_folders_from_list(folder_list, to_lowercase=False, remove_spaces=False):
     """ Function 2. For Item in List: Develop a function to create folders from a list of names."""
     for i in folder_list:
+        if to_lowercase:
+            i = i.lower()
+        if remove_spaces:
+            i = i.replace(" ", "")
         folder_list = str(i)
         Path(folder_list).mkdir(exist_ok=True)
         print(f"Folder '{folder_list}' created.")
@@ -34,7 +38,7 @@ def create_folders_periodically(duration, iterations):
     """ Function 4. While Loop: Write a function to create folders periodically (e.g., one folder every 5 seconds)."""
     i = 1
     while i <= iterations:
-        folder_list = "Folder_"+str(i)
+        folder_list = "folder_number_"+str(i)
         Path(folder_list).mkdir(exist_ok=True)
         print(f"Folder '{folder_list} created.")
         i += 1
@@ -61,7 +65,7 @@ def main():
     create_prefixed_folders(folder_names, prefix)
 
     # Call function 4 to create folders periodically using while
-    duration_secs = 5 # duration in seconds
+    duration_secs = 1 # duration in seconds
     count_iterations = 3 # number of iterations to perform in the while loop
     create_folders_periodically(duration_secs, count_iterations)
 
@@ -77,8 +81,6 @@ def main():
         "Oceania",
         "Middle East"
     ]
-    #    to_lowercase = map(str.lower, regions)
-    #    remove_spaces = regions.strip()
     create_folders_from_list(regions, to_lowercase=True, remove_spaces=True)
 
 if __name__ == '__main__':
